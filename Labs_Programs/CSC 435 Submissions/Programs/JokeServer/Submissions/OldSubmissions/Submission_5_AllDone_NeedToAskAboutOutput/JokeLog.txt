@@ -1,0 +1,131 @@
+User only connected to primary server only type ’s’ to toggle to secondary 
+and gets a message that no secondary is available.  Note that output from
+user Bob’s session was captured after parts A, B, C were completed so his
+session is in proverb mode.  (Part C does not affect this user since he is 
+only connected to the primary server)
+
+> java JokeClient
+Starting Joke Client, 1.8
+
+Using server: localhost, Port: 4545
+Enter your name: Bob
+s
+No secondary server, using localhost on 4545
+PB Bob: Early to bed, early to rise
+quit
+Goodbye, Bob!
+
+
+Part A. Output shows client connected to primary and secondary server with 8 output responses in 
+joke mode and 8 responses in proverb mode. The first four jokes sent were JD, JC, JB, JA are 
+sent and now that all four have been used, they may be reused. The next four that are sent
+are JA, JB, JC, JD.  
+
+The JokeClientAdmin switches to proverb mode and four proverbs are sent.  PB, PA, PC, PD and
+since all four have been sent, they may be reused.  The next four sent are PD, PB, PC, PA.
+
+B. User then enters ’s’ and is toggled to the secondary server, and the JokeClientAdmin 
+changes to secondary as well.
+
+C. Repeat part A for the secondary server
+
+— Output from JokeClientAdmin for this session:
+
+> java  JokeClientAdmin localhost localhost
+Starting Joke Admin Client, 1.8
+
+Primary server: localhost, Port: 5050
+Secondary server: localhost, Port: 5051
+
+Setting mode to proverb-mode  <== Changed to proverb mode for part A on primary
+s  							
+Using SECONDARY server localhost on port 5051  <== Toggled to secondary server
+
+<S2> Setting mode to proverb-mode  <== Changed to proverb mode for part C on secondary
+quit
+Goodbye!
+
+
+—- Output on server for this session
+
+> java JokeServer secondary
+Joke server 1.8 starting....listening at port 4546
+Joke server 1.8 starting....listening at port 4545
+Mode is: proverb-mode
+<S2> Mode is: proverb-mode
+
+
+
+> java JokeClient localhost localhost
+Starting Joke Client, 1.8
+
+Using server: localhost, Port: 4545
+Using server: localhost, Port: 4546
+Enter your name: Alice
+
+JD Alice: I had a dream that I was a muffler last night. I woke up exhausted!  <== Begin A
+
+JC Alice: Why did the Clydesdale give the pony a glass of water? Because he was a little horse!
+
+JB Alice: What time did the man go to the dentist? Tooth hurt-y.”
+
+JA Alice: A recent scientific study showed that out of 2,293,618,367 people, 94% are too lazy to actually read that number.
+
+JA Alice: A recent scientific study showed that out of 2,293,618,367 people, 94% are too lazy to actually read that number.
+
+JB Alice: What time did the man go to the dentist? Tooth hurt-y.”
+
+JC Alice: Why did the Clydesdale give the pony a glass of water? Because he was a little horse!
+
+JD Alice: I had a dream that I was a muffler last night. I woke up exhausted!
+
+PB Alice: Early to bed, early to rise <== Begin 8 proverbs
+
+PA Alice: There is no such thing as a free lunch
+
+PC Alice: A picture is worth a thousand words
+
+PD Alice: Absence makes the heart grow fonder
+
+PD Alice: Absence makes the heart grow fonder
+
+PB Alice: Early to bed, early to rise
+
+PC Alice: A picture is worth a thousand words
+
+PA Alice: There is no such thing as a free lunch  <== End A
+s  <== SWITCH TO SECONDARY, PART B
+Using localhost on port 4546
+<S2> JB Alice: I couldn’t believe that the highway department called my dad a thief. But when I got home, all the signs were there. <= C
+
+<S2> JC Alice: Why shouldn't you write with a broken pencil? Because it's pointless. 
+
+<S2> JD Alice: What did 0 say to 8? Nice belt!
+
+<S2> JA Alice: I saw a wino eating grapes.I told him, you gotta wait. (Mitch Hedberg)
+
+<S2> JB Alice: I couldn’t believe that the highway department called my dad a thief. But when I got home, all the signs were there.
+
+<S2> JD Alice: What did 0 say to 8? Nice belt!
+
+<S2> JA Alice: I saw a wino eating grapes.I told him, you gotta wait. (Mitch Hedberg)
+
+<S2> JC Alice: Why shouldn't you write with a broken pencil? Because it's pointless. 
+
+<S2> PC Alice: Fortune favors the bold
+
+<S2> PD Alice: There is no time like the present
+
+<S2> PB Alice: Don’t bite the hand that feeds you
+
+<S2> PA Alice: Beauty is in the eye of the beholder
+
+<S2> PA Alice: Beauty is in the eye of the beholder
+
+<S2> PC Alice: Fortune favors the bold
+
+<S2> PB Alice: Don’t bite the hand that feeds you
+
+<S2> PD Alice: There is no time like the present  <== End C
+quit
+Goodbye, Alice!

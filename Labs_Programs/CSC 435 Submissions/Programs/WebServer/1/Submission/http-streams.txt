@@ -1,0 +1,34 @@
+Request from browser:
+
+> java MyListener
+Inet server 1.8 starting....listening at port 2540
+
+GET /dog.txt HTTP/1.1
+Host: localhost:2540
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:46.0) Gecko/20100101 Firefox/46.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+
+Response from server, from Wireshark:
+
+Hypertext Transfer Protocol
+    HTTP/1.1 200 OK\r\n
+    Date: Tue, 24 Jan 2017 02:34:02 GMT\r\n
+    Server: Apache/2.2.3 (Red Hat)\r\n
+    Last-Modified: Wed, 07 Oct 2015 20:29:55 GMT\r\n
+    ETag: "30c78-30-521899bff76c0"\r\n
+    Accept-Ranges: bytes\r\n
+    Content-Length: 48\r\n
+    Content-Type: text/plain\r\n
+    Connection: close\r\n
+    \r\n
+    [HTTP response 1/1]
+    [Time since request: 0.102014000 seconds]
+    [Request in frame: 22]
+    File Data: 48 bytes
+Line-based text data: text/plain
+    This is Elliott's dog file on condor. Good job!\n
+

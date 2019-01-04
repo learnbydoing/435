@@ -1,0 +1,190 @@
+================================================== Scenario #1
+
+Output from client that is not connected to secondary and types ’s’
+
+> java JokeClient localhost
+Starting Joke Client, 1.8
+
+Using server: localhost, Port: 4545
+Enter email address: def@gmail.com
+Enter your name: Bob
+
+Primary file found, restoring state...
+Email not found in primary map, created a new entry: bcf298f8-2907-40bf-a8cf-7abf2bb82894
+PC Bob: A picture is worth a thousand words
+s
+No secondary server, using localhost on 4545
+Primary file found, restoring state...
+Found email in primary map, using uuid: bcf298f8-2907-40bf-a8cf-7abf2bb82894
+PB Bob: Early to bed, early to rise
+
+
+
+================================================== Scenario #3
+
+
+Client enters email address name (X) and (Y), and gets 8 jokes and 8 proverbs from primary server, where denoted, and they don’t repeat until all 4 (jokes and proverbs) have been used.  Note that the UUID is being looked up from the saved state, hence the UUID is the same for the give user. Also when the JokeClientAdmin switches to proverb mode (C), and this is reflected on the server (A).  The JokeClient then changes to secondary mode (F), and the JokeClientAdmin does the same (D).  The JokeClient then gets 8 jokes from the secondary and when the JokeClientAdmin switches to proverb-mode (E), the JokeClient gets 8 proverbs (G).  This is also reflected on the server (B).
+
+
+
+
+JokeServer Output
+
+> java JokeServer secondary
+Joke server 1.8 starting....listening at port 4546
+Joke server 1.8 starting....listening at port 4545
+Mode is: proverb-mode  (A)
+<S2> Mode is: proverb-mode  <== switch to secondary server (B)
+
+
+
+JokeClientAdmin output
+
+java JokeClientAdmin localhost localhost
+Starting Joke Admin Client, 1.8
+
+Primary server: localhost, Port: 5050
+Secondary server: localhost, Port: 5051
+
+Setting mode to proverb-mode  <===== switch to proverb-mode on primary (C)
+s                		<===== switch from primary to secondary  (D)
+Using SECONDARY server localhost on port 5051
+
+<S2> Setting mode to proverb-mode  <== switch to proverb-mode on secondary (E) 
+
+
+
+JokeCilent output
+
+> java JokeClient localhost localhost
+Starting Joke Client, 1.8
+
+Using server: localhost, Port: 4545
+Using server: localhost, Port: 4546
+Enter email address: abc@gmail.com (X)
+Enter your name: Alice   (Y)
+
+JB Alice: What time did the man go to the dentist? Tooth hurt-y.”
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+JC Alice: Why did the Clydesdale give the pony a glass of water? Because he was a little horse!
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+JA Alice: A recent scientific study showed that out of 2,293,618,367 people, 94% are too lazy to actually read that number.
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+JD Alice: I had a dream that I was a muffler last night. I woke up exhausted!
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+JD Alice: I had a dream that I was a muffler last night. I woke up exhausted!
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+JB Alice: What time did the man go to the dentist? Tooth hurt-y.”
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+JA Alice: A recent scientific study showed that out of 2,293,618,367 people, 94% are too lazy to actually read that number.
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+JC Alice: Why did the Clydesdale give the pony a glass of water? Because he was a little horse!
+            /*********************************** PROVERB MODE ON PRIMARY ****************/ (P)
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+PB Alice: Early to bed, early to rise
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+PA Alice: There is no such thing as a free lunch
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+PD Alice: Absence makes the heart grow fonder
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+PC Alice: A picture is worth a thousand words
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+PB Alice: Early to bed, early to rise
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+PA Alice: There is no such thing as a free lunch
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+PC Alice: A picture is worth a thousand words
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: a2dac243-22fa-4efb-933f-498e69d37b75
+PD Alice: Absence makes the heart grow fonder
+s      <============================================  JokeClient switches to secondary (F)
+Using localhost on port 4546
+<S2> JA Alice: I saw a wino eating grapes.I told him, you gotta wait. (Mitch Hedberg)
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> JC Alice: Why shouldn't you write with a broken pencil? Because it's pointless. 
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> JB Alice: I couldn’t believe that the highway department called my dad a thief. But when I got home, all the signs were there.
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> JD Alice: What did 0 say to 8? Nice belt!
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> JB Alice: I couldn’t believe that the highway department called my dad a thief. But when I got home, all the signs were there.
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> JC Alice: Why shouldn't you write with a broken pencil? Because it's pointless. 
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> JA Alice: I saw a wino eating grapes.I told him, you gotta wait. (Mitch Hedberg)
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> JD Alice: What did 0 say to 8? Nice belt!
+	/********************************************** PROVERB - MODE - SECONDARY ***********/ (G)
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> PC Alice: Fortune favors the bold
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> PB Alice: Don’t bite the hand that feeds you
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> PD Alice: There is no time like the present
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> PA Alice: Beauty is in the eye of the beholder
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> PC Alice: Fortune favors the bold
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> PA Alice: Beauty is in the eye of the beholder
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> PB Alice: Don’t bite the hand that feeds you
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 216397b0-16ff-4625-a829-1ab87f4a170a
+<S2> PD Alice: There is no time like the present

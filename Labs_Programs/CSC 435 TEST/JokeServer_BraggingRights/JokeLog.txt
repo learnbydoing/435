@@ -1,0 +1,85 @@
+
+User logs in with email address and name.  User gets 2 jokes, the admin is switched to proverb mode and gets 2 more jokes, and again to proverb mode to get 3 more proverbs.
+
+Note that the when the first joke is sent, the user is assigned a UUID that is used in subsequent requests.  That is, UUID is not generated each time, rather, it is looked up from the saved state.  
+
+When the user switches to the secondary server, a new UUID is generated and is used for the subsequent jokes and proverbs
+
+
+
+Starting Joke Admin Client, 1.8
+
+Primary server: localhost, Port: 5050
+Secondary server: localhost, Port: 5051
+
+Setting mode to proverb-mode
+
+Setting mode to joke-mode
+
+Setting mode to proverb-mode
+s
+Using SECONDARY server localhost on port 5051
+
+<S2> Setting mode to proverb-mode
+
+
+
+Starting Joke Client, 1.8
+
+Using server: localhost, Port: 4545
+Using server: localhost, Port: 4546
+Enter email address: abc@gmail.com
+Enter your name: Urvi
+
+JD Urvi: I had a dream that I was a muffler last night. I woke up exhausted!
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: fcb86f86-0d7d-4f83-bf3f-aa6a48157cab <== UUID for primary
+JB Urvi: What time did the man go to the dentist? Tooth hurt-y.”
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: fcb86f86-0d7d-4f83-bf3f-aa6a48157cab
+JA Urvi: A recent scientific study showed that out of 2,293,618,367 people, 94% are too lazy to actually read that number.
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: fcb86f86-0d7d-4f83-bf3f-aa6a48157cab
+PD Urvi: Absence makes the heart grow fonder
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: fcb86f86-0d7d-4f83-bf3f-aa6a48157cab
+PC Urvi: A picture is worth a thousand words
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: fcb86f86-0d7d-4f83-bf3f-aa6a48157cab
+JC Urvi: Why did the Clydesdale give the pony a glass of water? Because he was a little horse!
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: fcb86f86-0d7d-4f83-bf3f-aa6a48157cab
+JB Urvi: What time did the man go to the dentist? Tooth hurt-y.”
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: fcb86f86-0d7d-4f83-bf3f-aa6a48157cab
+PB Urvi: Early to bed, early to rise
+
+Primary file found, restoring state...
+Found email in primary map, using uuid: fcb86f86-0d7d-4f83-bf3f-aa6a48157cab
+PA Urvi: There is no such thing as a free lunch
+s                                      <=== Change to secondary
+Using localhost on port 4546
+<S2> JC Urvi: Why shouldn't you write with a broken pencil? Because it's pointless. 
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 920f7a88-e733-49a8-9000-f7cb7b10ff3d   <== UUID for secondary
+<S2> JA Urvi: I saw a wino eating grapes.I told him, you gotta wait. (Mitch Hedberg)
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 920f7a88-e733-49a8-9000-f7cb7b10ff3d
+<S2> JD Urvi: What did 0 say to 8? Nice belt!
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 920f7a88-e733-49a8-9000-f7cb7b10ff3d
+<S2> PA Urvi: Beauty is in the eye of the beholder
+
+Secondary file found, restoring state...
+Found email in secondary map, using uuid: 920f7a88-e733-49a8-9000-f7cb7b10ff3d
+<S2> PD Urvi: There is no time like the present

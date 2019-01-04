@@ -1,0 +1,25 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf340
+{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww16960\viewh12860\viewkind0
+\deftab720
+\pard\pardeftab720\sl320\partightenfactor0
+
+\f0\fs28 \cf0 \expnd0\expndtw0\kerning0
+I also read up on the role of a nonce in the Kurose textbook and found the following, from section 8.3.4 of Computer Networking: A Top-Down Approach, 5th Ed, Kurose and Ross:\uc0\u8232 \
+The purpose of a nonce is to guard against "playback attacks".  That is, a person\
+can use a sniffer to get messages and play them back at a later time.  The receiver of the messsage has no way of knowing that this is a playback of an earlier exchange or if it is indeed an original message.  A nonce is a number that a protocol using only once in a lifetime.  The receiver sends a nonce to the sender who then uses it to create the MAC, appends the MAC to the message, creates and extended message and sends that to the receiver.  The receiver calculates the MAC from the message and if it is the same as the MAC in the in the extended message, the receiver knows the sender generated the message.  The receiver also knows that it was generated after the nonce was sent since the nonce was used the calculate the MAC.\uc0\u8232 \
+For the Client Key Exchange record, I looked at the textbook to learn the role of the Master Secret:\
+\uc0\u8232 \
+Per section 8.5.1 of Computer Networking: A Top-Down Approach, 5th Ed, Kurose and Ross:\
+\uc0\u8232 \
+It is used to generate the following session keys:\uc0\u8232 \
+Session key for data sent from client to server\
+Session MAC key for data sent from client to server\
+Session encryption key for data sent from server to client\
+Session MAAC key for data sent from server to client\
+\uc0\u8232 \
+I then did a little reasearch to determine the purpose of the Change Cipher Spec record and found that its purpose is to change encryption (i.e., go to a new set of keys), between client and server without having to start another session*.  \
+\uc0\u8232 \
+* I found this information at http://www.pierobon.org/ssl/ch2/ccs.htm.\
+}
